@@ -1,4 +1,5 @@
-﻿<#----------------------------------------------------------------------------
+
+<#----------------------------------------------------------------------------
 LEGAL DISCLAIMER 
 This Sample Code is provided for the purpose of illustration only and is not 
 intended to be used in a production environment.  THIS SAMPLE CODE AND ANY 
@@ -119,6 +120,7 @@ function Get-VirusTotalReport {
 }
 
 
+
 function Main() {
     $pdo = (Get-CimInstance Win32_PnPSignedDriver | Select PDO, FriendlyName | where FriendlyName -match "camera" | Select PDO | Format-Table -HideTableHeaders | Out-String).Trim()
     # find and parse camera, microphone Physical Device Object Name
@@ -143,13 +145,12 @@ function Main() {
                 # $hash = Get-FileHash $procPath
 
                 $vtaReport = Get-VirusTotalReport -VTApiKey c2991babfe26cb3b610554863ea2d791cc0631e5952b540263d78d4ff0fd790a -FilePath $procPath
-
+                return
                 # Get-VirusTotalReport -VTApiKey c2991babfe26cb3b610554863ea2d791cc0631e5952b540263d78d4ff0fd790a -hash $hash
             }
         }
     }
 }
-
 
 
 <# This form was created using POSHGUI.com  a free online gui designer for PowerShell
@@ -164,6 +165,7 @@ $Form                            = New-Object system.Windows.Forms.Form
 $Form.ClientSize                 = '450,200'
 $Form.text                       = "Spythe-Man"
 $Form.TopMost                    = $false
+
 
 $Message                         = New-Object system.Windows.Forms.Label
 $Message.text                    = "Welcome"
@@ -200,9 +202,6 @@ $Button3.Font                    = 'Microsoft Sans Serif,10'
 $Button3.Visible                 = $true
 $Button3.add_Click($Start_Click)
 
-$Form.controls.AddRange(@($Message,$Button1,$Button2,$Button3))
-$Form.ShowDialog()
-
 $Yes_Click = {
     Stop-Process $currPid
     $Message.text                = "Process stopped. One less peeping process."
@@ -224,13 +223,16 @@ $Start_Click = {
     $Button3.Visible             = $false
     Start-Sleep -s 1
     Main
-    if ($currPid) {
-        $Message.text            = $vtaReport
-        $Button1.Visible         = $true
-        $Button2.Visible         = $true
-    } else {
+    if ($currPid -like $null) {
         $Message.text            = "No processes found."
         $Button3.Visible         = $true
         $Button3.text            = "Scan"
+    } else {
+        $Message.text            = ($vtaReport | Out-string).Trim()
+        $Button1.Visible         = $true
+        $Button2.Visible         = $true
     }
 }
+
+$Form.controls.AddRange(@($Message,$Button1,$Button2,$Button3))
+$Form.ShowDialog()
