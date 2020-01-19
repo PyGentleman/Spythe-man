@@ -162,7 +162,7 @@ Add-Type -AssemblyName System.Windows.Forms
 [System.Windows.Forms.Application]::EnableVisualStyles()
 
 $Form                            = New-Object system.Windows.Forms.Form
-$Form.ClientSize                 = '450,200'
+$Form.ClientSize                 = '1500,350'
 $Form.text                       = "Spythe-Man"
 $Form.TopMost                    = $false
 
@@ -172,14 +172,14 @@ $Message.text                    = "Welcome"
 $Message.AutoSize                = $true
 $Message.width                   = 25
 $Message.height                  = 10
-$Message.location                = New-Object System.Drawing.Point(182,71)
+$Message.location                = New-Object System.Drawing.Point(100,71)
 $Message.Font                    = 'Microsoft Sans Serif,10'
 
 $Button1                         = New-Object system.Windows.Forms.Button
 $Button1.text                    = "Yes stop it."
 $Button1.width                   = 100
 $Button1.height                  = 30
-$Button1.location                = New-Object System.Drawing.Point(33,155)
+$Button1.location                = New-Object System.Drawing.Point(350,300)
 $Button1.Font                    = 'Microsoft Sans Serif,10'
 $Button1.Visible                 = $false
 $Button1.add_Click($Yes_Click)
@@ -188,7 +188,7 @@ $Button2                         = New-Object system.Windows.Forms.Button
 $Button2.text                    = "No let it run."
 $Button2.width                   = 125
 $Button2.height                  = 30
-$Button2.location                = New-Object System.Drawing.Point(300,155)
+$Button2.location                = New-Object System.Drawing.Point(900,300)
 $Button2.Font                    = 'Microsoft Sans Serif,10'
 $Button2.Visible                 = $false
 $Button2.add_Click($No_Click)
@@ -197,7 +197,7 @@ $Button3                         = New-Object system.Windows.Forms.Button
 $Button3.text                    = "Start"
 $Button3.width                   = 60
 $Button3.height                  = 30
-$Button3.location                = New-Object System.Drawing.Point(183,155)
+$Button3.location                = New-Object System.Drawing.Point(705,155)
 $Button3.Font                    = 'Microsoft Sans Serif,10'
 $Button3.Visible                 = $true
 $Button3.add_Click($Start_Click)
